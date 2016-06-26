@@ -42,10 +42,6 @@ group :development, :test do
   
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-
-  # Testing
-  gem 'factory_girl_rails'
-  gem 'ffaker'
 end
 
 group :development do
@@ -60,4 +56,6 @@ group :test do
   # Testing
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
 end

@@ -31,6 +31,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Authentication
 gem 'devise'
 
+# Keeping secrets
+gem 'figaro'
+
 group :production do
   # Use postgres as the database for Active Record
   # gem 'pg'

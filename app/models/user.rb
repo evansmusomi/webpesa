@@ -26,4 +26,10 @@ class User < ActiveRecord::Base
   		where(conditions.to_hash).first
   	end
   end
+
+  # Calculate account balance
+  def account_balance
+    # Get difference between moneys_in and moneys_out
+    self.moneys_in.sum(:amount) - self.moneys_out.sum(:amount)
+  end
 end

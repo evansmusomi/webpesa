@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
   # Generate list of transactions and calculate balance
   # Accepts user_id
   def index
-
+    @user = current_user
   end
 
   # Initiate new transfer

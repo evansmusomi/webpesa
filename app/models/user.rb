@@ -27,9 +27,34 @@ class User < ActiveRecord::Base
   	end
   end
 
+  # Get user by email or mobile
+  def self.find_by_email_or_mobile(key)
+    # if number, search by mobile. Else search by email
+    if key.is_a?
+      User.find_by_mobile(key)
+    else
+      User.find_by_email(key)
+    end
+  end
+
   # Calculate account balance
-  def account_balance
+  def balance
     # Get difference between moneys_in and moneys_out
-    self.moneys_in.sum(:amount) - self.moneys_out.sum(:amount)
+    balance = self.moneys_in.sum(:amount) - self.moneys_out.where(transaction_type:'transfer').sum(:amount)
+  end
+
+  # Top up transactions
+  def topups
+    self.moneys_in.where(transaction_type:'topup')
+  end
+
+  # Money out transactions
+  def money_sent
+    self.moneys_out.where(transaction_type:'transfer')
+  end
+
+  # Money in transactions
+  def money_received
+    self.moneys_in.where(transaction_type:'transfer')
   end
 end

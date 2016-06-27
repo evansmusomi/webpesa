@@ -3,7 +3,8 @@ FactoryGirl.define do
     amount { rand() * 1000 }
     happened_on { FFaker::Time.date }
     code { SecureRandom.hex(5) }
-    sender
-    recipient
+    transaction_type 0
+    sender { :user }
+    recipient { :user }
   end
 end

@@ -1,9 +1,18 @@
 class UsersController < ApplicationController
-  # Hooks
-  before_action 
-  # Top up account
-  def top_up
+  # Top up account view
+  def new_top_up
     # Accept number and amount of money, add to user account
+
+  end
+
+  # Credit user account with money indicated
+  def create_top_up
+
+  end
+
+  private
+  # Allowed parameters
+  def user_params
 
   end
 end

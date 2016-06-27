@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627004816) do
+ActiveRecord::Schema.define(version: 20160627084636) do
 
   create_table "transactions", force: :cascade do |t|
     t.decimal  "amount"
     t.date     "happened_on"
     t.string   "code"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "sender_id"
     t.integer  "recipient_id"
+    t.integer  "type",         default: 0
   end
 
   add_index "transactions", ["recipient_id"], name: "index_transactions_on_recipient_id"

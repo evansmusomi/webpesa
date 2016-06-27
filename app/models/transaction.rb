@@ -15,6 +15,8 @@ class Transaction < ActiveRecord::Base
 
   # Create unique transaction code
   def generate_code!
-    
+    begin
+      self.code = SecureRandom.hex(5)
+    end while self.class.exists?(code: code)
   end
 end

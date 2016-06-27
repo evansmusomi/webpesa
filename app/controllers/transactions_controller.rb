@@ -5,8 +5,6 @@ class TransactionsController < ApplicationController
   # Generate list of transactions and calculate balance
   # Accepts user_id
   def index
-    @balance = current_user.balance
-
   end
 
   # Initiate new transfer
@@ -35,7 +33,7 @@ class TransactionsController < ApplicationController
       flash[:notice] = "#{@transaction.code} confirmed. KES #{@transaction.amount} added to your account. New balance is #{current_user.balance}"
       redirect_to transactions_path
     else
-      flash[:error] = @collection.errors.full_messages.to_sentence
+      flash[:error] = @transaction.errors.full_messages.to_sentence
     end
   end
 

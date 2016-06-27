@@ -1,18 +1,18 @@
 <div class="row">
   <div id="balance" class="col-md-4 col-md-offset-4 col-xs-12">
-    <p>Your account balance is <em><%= number_to_currency(@balance, unit:"KES ") %></em></p>
+    <p>Your account balance is <em><%= number_to_currency(@user.balance, unit:"KES ") %></em></p>
   </div>
 </div>
 <div id="transactions" class="row">
   <div class="col-md-4 col-md-offset-4 col-xs-12">
-    <% if @user.moneys_in.blank? %>
+    <% if @user.topups.blank? %>
       <p>Looks like no money's come in yet.</p>
     <% else
-        @user.moneys_in.each do |transaction, t|
+        @user.topups.each do |transaction, t|
     %>
       <li>
-        <div><span class="label label-success"><%= transaction.code %></span> confirmed. <%= number_to_currency(transaction.amount, unit:"KES ") %> received <%= transaction.recipient.name %> on <%= transaction.happened_on %></div>
-        </li>
+        <div><span class="label label-success"><%= transaction.code %></span> confirmed. You topped up your account by <%= number_to_currency(transaction.amount, unit:"KES ") %> on <%= transaction.happened_on %>.</div>
+      </li>
     <%  end
       end %>
   </div>

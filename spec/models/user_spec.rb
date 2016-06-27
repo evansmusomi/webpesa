@@ -20,8 +20,8 @@ RSpec.describe User, type: :model do
   it { should validate_confirmation_of(:password) }
   it { should allow_value('example@domain.com').for(:email) }
   it { should validate_presence_of(:mobile) }
-  it { should validate_uniqueness_of(:mobile).case_insensitive }
   it { should validate_numericality_of(:mobile) }
+  it { should validate_uniqueness_of(:mobile).case_insensitive }
   it { should validate_presence_of(:name) }
-  
+
 end

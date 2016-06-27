@@ -2,11 +2,14 @@ class Transaction < ActiveRecord::Base
   # Hooks
   before_create :generate_code!
 
+  # Virtual attribute for money transfer
+  attr_accessor :recipient_email, :recipient_mobile
+
   # Associations
   belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
   belongs_to :sender, class_name: 'User', foreign_key: 'sender_id'
 
-  # Custom transaction type
+  # Custom transaction types
   enum type: { topup: 0, transfer: 1}
 
   # Basic Validations

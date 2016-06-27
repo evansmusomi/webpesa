@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :transaction do
-    amount "9.99"
-    happened_on "2016-06-27"
-    code "MyString"
-    sender_id 1
-    recipient_id 1
+    amount { rand() * 1000 }
+    happened_on { FFaker::Time.date }
+    code { SecureRandom.hex(5) }
+    sender_id { rand() * 100 }
+    recipient_id { rand() * 100 }
   end
 end

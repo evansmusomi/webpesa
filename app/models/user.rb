@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :moneys_in, class_name: 'Transaction', foreign_key: 'recipient_id'
   has_many :moneys_out, class_name: 'Transaction', foreign_key: 'sender_id'
 
-  # Validations
+  # Basic Validations
   validates :mobile, presence:true, uniqueness:{ case_sensitive: false}, length:{ minimum: 10, maximum: 15}, numericality: true
   validates :name, presence: true
 

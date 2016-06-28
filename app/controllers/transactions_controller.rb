@@ -28,8 +28,12 @@ class TransactionsController < ApplicationController
       }
 
       if @transaction.valid?
-        # Attempt to save
+        # Save transaction
         if @transaction.save
+          # Send notification to recipient
+          TransactionMailer.received_money_email(@transaction).deliver_later
+
+          # Return to list of transactions
           flash[:notice] = "<span class='text-uppercase'>#{@transaction.code}</span> confirmed. KES #{@transaction.amount} sent to #{@transaction.recipient.name}."
           redirect_to transactions_path
         else

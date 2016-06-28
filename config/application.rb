@@ -34,5 +34,8 @@ module Webpesa
         g.helper = false
     end
     config.autoload_paths += %W(\#{config.root}/lib)    
+    
+    # Configure action mailer preview path
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
   end
 end

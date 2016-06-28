@@ -1,7 +1,7 @@
-<h1>You've received <%= number_to_currency(@transaction.amount, unit:"KES ") %> on WPESA.</h1>
+<h1>Your WPESA Walet is Happy &#9786;</h1>
 
 <span style="text-transform:uppercase"><%= @transaction.code %></span> confirmed. <strong><%= number_to_currency(@transaction.amount, unit:"KES ") %></strong> received from <%= @transaction.sender.name %> <%= human_time(@transaction.created_at) %>.
 
-<%= link_to "Visit WPESA", unauthenticated_root_url %> to send money through email or mobile.
+<%= link_to "Visit WPESA", unauthenticated_root_url, target:'_blank' %> to send money through email or mobile.
 Best,
 WPESA team.

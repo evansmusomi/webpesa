@@ -12,13 +12,14 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
       	<% if user_signed_in? %>
-      		<li class="active"><%= link_to 'Home', authenticated_root_path %></li>
-        	<li><%= link_to 'Top Up', new_top_up_transactions_path %></li>
-        	<li><%= link_to 'Send Money', new_transaction_path %></li>
-        	<li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+      		<li class="active"><%= link_to innocent('<i class="glyphicon glyphicon-home"></i> Home'), authenticated_root_path %></li>
+        	<li><%= link_to innocent('<i class="glyphicon glyphicon-plus"></i> Top Up'), new_top_up_transactions_path %></li>
+        	<li><%= link_to innocent('<i class="glyphicon glyphicon-send"></i> Send Money'), new_transaction_path %></li>
+        	<li><%= link_to innocent('<i class="glyphicon glyphicon-user"></i> Profile'), edit_user_registration_path %></li>
+          <li><%= link_to innocent('<i class="glyphicon glyphicon-log-out"></i> Log out'), destroy_user_session_path, method: :delete %></li>
       	<% else %>
-      		<li class="active"><%= link_to 'Home', unauthenticated_root_path %></li>
-	        <li><%= link_to 'Register', new_user_registration_path %></li>
+      		<li class="active"><%= link_to innocent('<i class="glyphicon glyphicon-home"></i> Home'), unauthenticated_root_path %></li>
+	        <li><%= link_to innocent('<i class="glyphicon glyphicon-user"></i> Register'), new_user_registration_path %></li>
       	<% end %>
       </ul>
     </div><!--/.nav-collapse -->

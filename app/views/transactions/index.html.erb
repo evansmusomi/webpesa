@@ -1,21 +1,30 @@
 <div class="row">
-  <div id="balance" class="jumbotron col-md-12 col-xs-12">
-    <p><%= @user.name %>, you have <em><%= number_to_currency(@user.balance, unit:"KES ") %></em> on WPESA.</p>
+  <div id="balance" class="jumbotron col-md-12 col-xs-12 text-center">
+    <h4><%= @user.name %>, you have <em><%= number_to_currency(@user.balance, unit:"KES ") %></em> on WPESA.</h4>
+    <div class="actions">
+      <%= link_to 'Send Money', new_transaction_path, class:'btn btn-success btn-lg' %> or <%= link_to 'Top Up', new_top_up_transactions_path, class:'btn btn-default btn-lg' %>
+    </div>
   </div>
 </div>
 <div id="transactions" class="row">
   <div class="col-md-12 col-xs-12">
-    <!-- Nav tabs -->
-    <ul class="nav nav-pills">
-      <li role="presentation" class="active"><a href="#receipts" aria-controls="receipts" role="tab" data-toggle="tab">Money Received</a></li>
-      <li role="presentation"><a href="#sends" aria-controls="sends" role="tab" data-toggle="tab">Money Sent</a></li>
-      <li role="presentation"><a href="#topups" aria-controls="topups" role="tab" data-toggle="tab">Top Ups</a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-     <%= render 'transactions/receipts' %>
-     <%= render 'transactions/sends' %>
-     <%= render 'transactions/topups' %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills">
+          <li role="presentation" class="active"><a href="#receipts" aria-controls="receipts" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-circle-arrow-right"></i> Money Received</a></li>
+          <li role="presentation"><a href="#sends" aria-controls="sends" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-circle-arrow-left"></i> Money Sent</a></li>
+          <li role="presentation"><a href="#topups" aria-controls="topups" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-circle-arrow-up"></i> Top Ups</a></li>
+        </ul>
+      </div>
+      <div class="panel-body">
+        <!-- Tab panes -->
+        <div class="tab-content">
+         <%= render 'transactions/receipts' %>
+         <%= render 'transactions/sends' %>
+         <%= render 'transactions/topups' %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

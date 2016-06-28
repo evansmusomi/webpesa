@@ -4,9 +4,12 @@
   <% else
       @user.topups.each do |transaction, t|
   %>
-    <li>
-      <div><span class="label label-success"><%= transaction.code %></span> confirmed. You topped up your account by <%= number_to_currency(transaction.amount, unit:"KES ") %> on <%= transaction.happened_on %>.</div>
-    </li>
+    <div class="message panel panel-default">
+      <div class="panel-body">
+        <i class="glyphicon glyphicon-credit-card"></i> 
+        <span class="text-uppercase"><%= transaction.code %></span> confirmed. <strong><%= number_to_currency(transaction.amount, unit:"KES ") %></strong> added to your account <%= human_time(transaction.created_at) %>.
+      </div>
+    </div>
   <%  end
     end %>
 </div>

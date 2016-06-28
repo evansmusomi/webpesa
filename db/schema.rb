@@ -11,17 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627125446) do
+ActiveRecord::Schema.define(version: 20160628133247) do
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "transactions", force: :cascade do |t|
     t.decimal  "amount"
     t.date     "happened_on"
     t.string   "code"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.integer  "transaction_type", default: 0
+    t.integer  "transaction_type",  default: 0
+    t.decimal  "sender_balance",    default: 0.0
+    t.decimal  "recipient_balance", default: 0.0
   end
 
   add_index "transactions", ["recipient_id"], name: "index_transactions_on_recipient_id"

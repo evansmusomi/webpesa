@@ -34,6 +34,9 @@ gem 'devise'
 # Keeping secrets
 gem 'figaro'
 
+# Async job processing
+gem 'delayed_job_active_record'
+
 group :production do
   # Use postgres as the database for Active Record
   # gem 'pg'

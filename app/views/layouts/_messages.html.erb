@@ -1,9 +1,9 @@
 <% flash.each do |key, value| %>
 	<div class="alert alert-<%= key %>">
 		<a href="#" data-dismiss="alert" class="close">x</a>
-		<ul class="nostyle">
+		<ul class="no-style">
 			<li>
-				<%= value %>
+				<%= innocent(value) %>
 			</li>
 		</ul>
 	</div>

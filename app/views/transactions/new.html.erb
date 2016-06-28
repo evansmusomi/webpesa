@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+		<h2>Send Money</h2>
+	  </div>
+	  <div class="panel-body">
+	  	<p class="help-block">Enter the recipient's email or mobile number and the amount you want to transfer.</p>
+
+		<%= form_for(@transaction, url: transactions_path(@post), html: { method: :post }) do |f| %>
+
+		<div class="form-group">
+			<%= f.label :recipient_key, "Mobile / Email" %><br />
+			<%= f.text_field :recipient_key, autofocus: true, class: "form-control" %>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :amount %><br />
+			<%= f.number_field :amount, class: "form-control" %>
+		</div>		  
+
+		<div class="actions">
+		<%= f.submit "Send", class: "btn btn-success btn-lg" %>
+		</div>
+		<% end %>
+  	</div>
+    </div>
+  </div>
+</div>

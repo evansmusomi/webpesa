@@ -9,7 +9,7 @@ class TransactionsController < ApplicationController
   # Initiate new transfer
   # Accepts sender_id
   def new
-    current_user.moneys_out.new
+    @transaction = current_user.moneys_out.new
   end
 
   # Creates transfer
@@ -18,21 +18,30 @@ class TransactionsController < ApplicationController
     @transaction = current_user.moneys_out.new(transaction_params)
 
     # Get recipient_id
-    recipient = User.find_by_email_or_mobile(params[:recipient_key])
+    recipient = User.find_by_email_or_mobile(@transaction.recipient_key)
+    if recipient
+      # Set transaction attributes
+      @transaction.attributes = {
+        recipient_id: recipient.id,
+        transaction_type: :transfer,
+        happened_on: Time.zone.now
+      }
 
-    # Set transaction attributes
-    @transaction.attributes = {
-      recipient_id: recipient.id,
-      transaction_type: :transfer,
-      happened_on: Time.zone.now
-    }
-
-    # Attempt to save
-    if @transaction.save!
-      flash[:notice] = "#{@transaction.code} confirmed. KES #{@transaction.amount} sent to #{@transaction.recipient.name} (#{@transaction.recipient.mobile} on #{@transaction.happened_on}. New balance is #{current_user.balance}."
-      redirect_to transactions_path
+      if @transaction.valid?
+        # Attempt to save
+        if @transaction.save!
+          flash[:notice] = "<span class='text-uppercase'>#{@transaction.code}</span> confirmed. KES #{@transaction.amount} sent to #{@transaction.recipient.name}."
+          redirect_to transactions_path
+        else
+          flash[:error] = @transaction.errors.full_messages.to_sentence
+        end
+      else
+        flash[:error] = @transaction.errors.full_messages.to_sentence
+        render new_transaction_path
+      end
     else
-      flash[:error] = @transaction.errors.full_messages.to_sentence
+      flash[:error] = "WPESA couldn't find that recipient. Verify the mobile or email before trying again."
+      render new_transaction_path
     end
   end
 
@@ -45,7 +54,7 @@ class TransactionsController < ApplicationController
   # Initiate account top up
   # Accepts user_id
   def new_top_up
-    current_user.moneys_in.new
+    @transaction = current_user.moneys_in.new
   end
 
   # Credites user account

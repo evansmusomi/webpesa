@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
 
   # Top up transactions
   def topups
-    self.moneys_in.where(transaction_type: 0)
+    self.moneys_in.where(transaction_type: 0).order(id: :desc)
   end
 
   # Sum of top ups
@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
 
   # Money out transactions
   def sends
-    self.moneys_out.where(transaction_type: 1)
+    self.moneys_out.where(transaction_type: 1).order(id: :desc)
   end
 
   # Sum of sends
@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
 
   # Money in transactions
   def receipts
-    self.moneys_in.where(transaction_type: 1)
+    self.moneys_in.where(transaction_type: 1).order(id: :desc)
   end
 
   # Sum of receipts

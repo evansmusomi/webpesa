@@ -40,7 +40,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Mailer settings
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'lvh.me', port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
@@ -51,4 +51,5 @@ Rails.application.configure do
     domain: 'lvh.me',
     enable_starttls_auto: true
   }
+  config.action_mailer.perform_deliveries = true
 end

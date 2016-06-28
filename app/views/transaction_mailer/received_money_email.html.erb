@@ -1,4 +1,4 @@
-<h1>Your WPESA wallet is Happy &#9786;</h1>
+<h1><%= @transaction.recipient.name %>, your WPESA wallet is Happy &#9786;</h1>
 
 <p><span style="text-transform:uppercase"><%= @transaction.code %></span> confirmed. <strong><%= number_to_currency(@transaction.amount, unit:"KES ") %></strong> received from <%= @transaction.sender.name %> <%= human_time(@transaction.created_at) %>.</p>
 

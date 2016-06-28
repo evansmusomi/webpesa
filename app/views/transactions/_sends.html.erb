@@ -1,0 +1,12 @@
+<div role="tabpanel" class="tab-pane" id="sends">
+  <% if @user.sends.blank? %>
+    <p>Looks like no money's gone out yet.</p>
+  <% else
+      @user.sends.each do |transaction, t|
+  %>
+    <li>
+      <div><span class="label label-success"><%= transaction.code %></span> confirmed. You sent <%= number_to_currency(transaction.amount, unit:"KES ") %> to <%= transaction.recipient.name %> on <%= transaction.happened_on %>.</div>
+    </li>
+  <%  end
+    end %>
+</div>

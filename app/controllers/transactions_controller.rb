@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
 
       if @transaction.valid?
         # Attempt to save
-        if @transaction.save!
+        if @transaction.save
           flash[:notice] = "<span class='text-uppercase'>#{@transaction.code}</span> confirmed. KES #{@transaction.amount} sent to #{@transaction.recipient.name}."
           redirect_to transactions_path
         else
@@ -70,7 +70,7 @@ class TransactionsController < ApplicationController
     }
 
     if @transaction.save!
-      flash[:notice] = "#{@transaction.code} confirmed. KES #{@transaction.amount} added to your account on #{@transaction.happened_on}. New balance is #{current_user.balance}."
+      flash[:notice] = "<span class='text-uppercase'>#{@transaction.code}</span> confirmed. KES #{@transaction.amount} added to your account on."
       redirect_to transactions_path
     else
       flash[:error] = @transaction.errors.full_messages.to_sentence

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Transaction, type: :model do
-  let(:transaction){ FactoryGirl.build(:transaction) }
+  let(:transaction){ FactoryGirl.build :transaction }
   subject { transaction }
 
   # Is valid factory
@@ -13,14 +13,14 @@ RSpec.describe Transaction, type: :model do
   it { should respond_to(:code) }
   it { should respond_to(:sender_id) }
   it { should respond_to(:recipient_id) }
-  it { should respond_to(:type) }
+  it { should respond_to(:transaction_type) }
 
   # Basic Validations
   it { should validate_presence_of(:amount) }
   it { should validate_numericality_of(:amount).is_greater_than(0) }
   it { should validate_presence_of(:happened_on) }
+  it { should validate_uniqueness_of(:code) }
   it { should validate_presence_of(:code) }
-  it { should validate_uniqueness_of(:code).case_insensitive }
   it { should validate_length_of(:code).is_equal_to(10) }
   it { should validate_presence_of(:sender_id) }
   it { should validate_presence_of(:recipient_id) }

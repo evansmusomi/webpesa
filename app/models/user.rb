@@ -41,6 +41,11 @@ class User < ActiveRecord::Base
   def balance
     # Get difference between moneys_in and moneys_out
     balance = self.moneys_in.sum(:amount) - self.moneys_out.where(transaction_type:'transfer').sum(:amount)
+    if balance.is_a?
+      balance
+    else
+      0
+    end
   end
 
   # Top up transactions

@@ -1,6 +1,6 @@
 class Transaction < ActiveRecord::Base
   # Hooks
-  before_create :generate_code!
+  before_validation :generate_code!, on: :create
   before_save :validate_amount
 
   # Virtual attribute for money transfer
@@ -14,9 +14,9 @@ class Transaction < ActiveRecord::Base
   enum transaction_type: { topup: 0, transfer: 1}
 
   # Basic Validations
+  validates :code, uniqueness: { case_sensitive: false}, presence: true, length:{is: 10}
   validates :happened_on, :sender_id, :recipient_id, :transaction_type, presence: true
   validates :amount, numericality: { greater_than: 0 }, presence:true
-  validates :code, uniqueness: true, presence: true, length:{is: 10}
   validates :sender_id, :recipient_id, presence: true
 
   # Create unique transaction code
@@ -28,7 +28,7 @@ class Transaction < ActiveRecord::Base
 
   # Ensure the amount transferred is not more than what's in the account
   def validate_amount
-    if transaction_type == 'transfer'
+    if transaction_type == :transfer
       if amount > User.find(sender_id).balance
         errors.add(:amount, "can't be more than your account balance")
       end

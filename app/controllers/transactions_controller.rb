@@ -49,7 +49,7 @@ class TransactionsController < ApplicationController
   end
 
   # Credites user account
-  # Accepts amount and mobile
+  # Accepts amount
   def create_top_up
     @transaction = current_user.moneys_in.new(transaction_params)
 

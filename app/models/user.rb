@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   # Get user by email or mobile
   def self.find_by_email_or_mobile(key)
     # if number, search by mobile. Else search by email
-    if key.is_a?
+    if key.to_i > 0
       User.find_by_mobile(key)
     else
       User.find_by_email(key)
@@ -40,9 +40,9 @@ class User < ActiveRecord::Base
   # Calculate account balance
   def balance
     # Get difference between moneys_in and moneys_out
-    balance = self.moneys_in.sum(:amount) - self.moneys_out.where(transaction_type:'transfer').sum(:amount)
-    if balance.is_a?
-      balance
+    balance = self.topups_sum(1) + self.money_received(1) - self.money_sent(1)
+    if balance > 0
+      balance.to_s
     else
       0
     end
@@ -50,16 +50,43 @@ class User < ActiveRecord::Base
 
   # Top up transactions
   def topups
-    self.moneys_in.where(transaction_type:'topup')
+    self.moneys_in.where(transaction_type: 0)
+  end
+
+  # Sum of top ups
+  def topups_sum(number = false)
+    if number
+      self.topups.sum(:amount)
+    else
+      self.topups.sum(:amount).to_s
+    end
   end
 
   # Money out transactions
-  def money_sent
-    self.moneys_out.where(transaction_type:'transfer')
+  def sends
+    self.moneys_out.where(transaction_type: 1)
+  end
+
+  # Sum of sends
+  def money_sent(number = false)
+    if number
+      self.sends.sum(:amount)
+    else
+      self.sends.sum(:amount).to_s
+    end
   end
 
   # Money in transactions
-  def money_received
-    self.moneys_in.where(transaction_type:'transfer')
+  def receipts
+    self.moneys_in.where(transaction_type: 1)
+  end
+
+  # Sum of receipts
+  def money_received(number = false)
+    if number
+      self.receipts.sum(:amount)
+    else
+      self.receipts.sum(:amount).to_s
+    end
   end
 end

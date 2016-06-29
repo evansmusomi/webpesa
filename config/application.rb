@@ -37,7 +37,6 @@ module Webpesa
     
     # Configure action mailer preview path
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
-
     
     # Set background processor
     config.active_job.queue_adapter = :delayed_job

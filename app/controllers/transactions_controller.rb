@@ -31,7 +31,7 @@ class TransactionsController < ApplicationController
         # Save transaction
         if @transaction.save
           # Send notification to recipient
-          SendEmailJob.set(wait: 10.seconds).perform_later(@transaction)
+          SendEmailJob.set(wait: 2.minutes).perform_later(@transaction)
 
           # Return to list of transactions
           flash[:notice] = "<span class='text-uppercase'>#{@transaction.code}</span> confirmed. KES #{@transaction.amount} sent to #{@transaction.recipient.name}."

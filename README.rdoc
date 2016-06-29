@@ -1,28 +1,21 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app demonstrates a simple money transfer service. To view the app check out http://wpesa.herokuapp.com
 
-Things you may want to cover:
+Highlights:
 
-* Ruby version
+* Ruby version: 2.3.0
 
-* System dependencies
+* Rails version: 4.2.6
 
-* Configuration
+* Authentication: Devise (Warden)
 
-* Database creation
+* Database: Postgres (Production) and SQlite
 
-* Database initialization
+* Testing: RSpec, FactoryGirl, FFaker and Shoulda-Matchers
 
-* How to run the test suite
+* Email service: SendGrid
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+* UI styling: Twitter Bootstrap
 
 * ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.

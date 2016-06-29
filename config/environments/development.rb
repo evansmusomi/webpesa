@@ -41,14 +41,14 @@ Rails.application.configure do
 
   # Mailer settings
   config.action_mailer.default_url_options = { host: 'lvh.me', port: 3000 }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: 587,
     authentication: :plain,
     user_name: ENV['SENDGRID_USERNAME'],
     password: ENV['SENDGRID_PASSWORD'],
-    domain: 'lvh.me',
+    domain: ENV['DOMAIN'],
     enable_starttls_auto: true
   }
   config.action_mailer.perform_deliveries = true

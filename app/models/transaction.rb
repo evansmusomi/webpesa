@@ -3,7 +3,7 @@ class Transaction < ActiveRecord::Base
   before_validation :generate_code!, on: :create
   before_save :validate_amount
 
-  # Virtual attribute for money transfer
+  # Virtual attribute to identify transaction beneficiary by email or mobile.
   attr_accessor :recipient_key
 
   # Associations
@@ -19,14 +19,14 @@ class Transaction < ActiveRecord::Base
   validates :amount, numericality: { greater_than: 0 }, presence:true
   validates :sender_id, :recipient_id, presence: true
 
-  # Create unique transaction code
+  # Creates unique transaction code that is 10 characters long.
   def generate_code!
     begin
       self.code = SecureRandom.hex(5)[0...10]
     end while self.class.exists?(code: code)
   end
 
-  # Ensure the amount transferred is not more than what's in the account
+  # Ensures the amount transferred is not more than what's in the account.
   def validate_amount
     if transaction_type == :transfer
       if amount > User.find(sender_id).balance

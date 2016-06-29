@@ -25,7 +25,7 @@ config/initializers/secret_token.rb
 .rvmrc
 
 # Extra files to ignore
-doc/
+/doc/
 *.swp
 *~
 .DS_Store

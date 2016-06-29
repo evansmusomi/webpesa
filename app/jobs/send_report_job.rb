@@ -1,6 +1,8 @@
 class SendReportJob < ActiveJob::Base
   queue_as :transaction_reports
 
+  # Performs queued 'send report' task.
+  # Input(s): Registered user.
   def perform(user)
   	# Send report
     @user = user

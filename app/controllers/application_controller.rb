@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # Sets permitted input parameters that apply to to all controllers
   def configure_permitted_parameters
   	added_attrs = [:email, :mobile, :name, :password, :password_confirmation, :remember_me]
   	devise_parameter_sanitizer.permit :sign_up, keys: added_attrs

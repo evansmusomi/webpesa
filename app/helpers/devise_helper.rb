@@ -1,4 +1,5 @@
 module DeviseHelper
+  # Converts Devise errors into a Twitter Bootstrap friendly format (dismissable notices).
   def devise_error_messages!
     return '' if resource.errors.empty?
 

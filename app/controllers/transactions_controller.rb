@@ -2,18 +2,20 @@ class TransactionsController < ApplicationController
   # Hooks
   before_action :set_user
 
-  # Shows list of logged in user transactions
+  # Shows list of logged in user transactions.
+  # Transaction types: money received, money sent and top ups.
+  # Input(s): logged in user
   def index
   end
 
-  # Initiate new transfer
-  # Accepts sender_id
+  # Displays new money transfer page.
+  # Input(s): logged in user
   def new
     @transaction = current_user.moneys_out.new
   end
 
-  # Creates transfer
-  # Accepts sender_id, mobile or email and amount
+  # Creates money transfer transaction.
+  # Inputs: logged in user, recipient (mobile or email), amount.
   def create
     @transaction = current_user.moneys_out.new(transaction_params)
 
@@ -50,20 +52,20 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # Shows transaction details
-  # Accepts transaction id
+  # Shows transaction details.
+  # Input(s): Transaction ID
   def show
     @transaction = Transaction.find(params[:id])
   end
 
-  # Initiate account top up
-  # Accepts user_id
+  # Displays account top up page.
+  # Input(s): Logged in user.
   def new_top_up
     @transaction = current_user.moneys_in.new
   end
 
-  # Credites user account
-  # Accepts amount
+  # Tops up logged in user's account.
+  # Input(s): logged in user, amount.
   def create_top_up
     @transaction = current_user.moneys_in.new(transaction_params)
 
@@ -84,12 +86,13 @@ class TransactionsController < ApplicationController
 
   private
   # Callbacks for common setup or constraints between actions
-  # Allowed parameters
+  
+  # Restricts parameters allowed for transactions (amount, recipient).
 	def transaction_params
 		params.require(:transaction).permit(:amount, :recipient_key)
 	end
 
-  # Set logged in user
+  # Assigns logged in user to an accessible instance variable.
   def set_user
     @user = current_user
   end

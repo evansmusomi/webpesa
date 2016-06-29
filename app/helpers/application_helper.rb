@@ -1,20 +1,20 @@
 module ApplicationHelper
-	# Make date to more user friendly format
+	# Converts date provided to more user friendly format.
 	def human_date(date)
 		date.strftime("%B %-d, %Y")
 	end
 
-	# Make time more user friendly format
+	# Converts time provided to more user friendly format.
 	def human_time(date)
 		date.strftime("on %d/%m/%y at %k:%I %p")
 	end
 
-	# Escape HTML
+	# Escapes HTML elements in the object provided.
 	def innocent(html)
 		html.html_safe
 	end
 
-	# Set active nav based on current page
+	# Sets active navigation link depending on the current page.
 	def nav_link(link_text, link_path)
 		class_name = current_page?(link_path) ? 'active' : ''
 

@@ -85,15 +85,15 @@ class TransactionsController < ApplicationController
   end
 
   private
-  # Callbacks for common setup or constraints between actions
+    # Callbacks for common setup or constraints between actions
   
-  # Restricts parameters allowed for transactions (amount, recipient).
-	def transaction_params
-		params.require(:transaction).permit(:amount, :recipient_key)
-	end
+    # Restricts parameters allowed for transactions (amount, recipient).
+  	def transaction_params
+  		params.require(:transaction).permit(:amount, :recipient_key)
+  	end
 
-  # Assigns logged in user to an accessible instance variable.
-  def set_user
-    @user = current_user
-  end
+    # Assigns logged in user to an accessible instance variable.
+    def set_user
+      @user = current_user
+    end
 end
